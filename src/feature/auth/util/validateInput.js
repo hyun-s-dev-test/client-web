@@ -37,6 +37,8 @@
 //   return { password, id, email, name, phone };
 // };
 
+import { getDay } from "./getDay";
+
 export const validateInput = (type) => {
   const email = (input) => {
     const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -71,6 +73,24 @@ export const validateInput = (type) => {
     const message = isValid ? "" : "한글과 영문만 입력이 가능합니다.";
     return { isValid, message };
   };
+  const year = (input) => {
+    const numYear = Number(input) || 0;
+    const isValid = numYear <= 0 ? false : numYear >= new Date().getFullYear() ? false : true;
+    const message = isValid ? "" : "올바른 숫자 네자리를 넣어주세요";
+    return { isValid, message };
+  };
+  const month = (input) => {
+    const numMonth = Number(input) || 0;
+    const isValid = numMonth <= 0 ? false : numMonth > 12 ? false : true;
+    const message = isValid ? "" : "올바른 숫자를 넣어주세요. 예) 3월의 경우 3을 입력해주세요.";
+    return { isValid, message };
+  };
+  const day = (input) => {
+    const numDay = Number(input) || 0;
+    const isValid = numDay <= 0 ? false : numDay >= new Date().getFullYear() ? false : true;
+    const message = isValid ? "" : "올바른 일을 넣어주세요. 예) 21일의 경우 21을 입력해주세요.";
+    return { isValid, message };
+  };
 
   return type === "email"
     ? email
@@ -82,6 +102,12 @@ export const validateInput = (type) => {
     ? name
     : type === "phone"
     ? phone
+    : type === "year"
+    ? year
+    : type === "month"
+    ? month
+    : type === "day"
+    ? day
     : null;
   //   return { password, id, email, name, phone };
 };
