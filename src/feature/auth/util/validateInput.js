@@ -60,7 +60,7 @@ export const validateInput = (type) => {
   };
   const phone = (input) => {
     const regex = /^\d{3}-\d{3,4}-\d{4}$/;
-    const regexWithoutHyphen = /\d{11}/;
+    const regexWithoutHyphen = /^\d{11}$/;
     const isValid = regex.test(input) || regexWithoutHyphen.test(input);
     const message = isValid ? "" : "올바른 자리수의 폰번호가 아닙니다.";
     return { isValid, message };
