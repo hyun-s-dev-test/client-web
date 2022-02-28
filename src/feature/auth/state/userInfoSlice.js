@@ -25,7 +25,10 @@ export const userInfoSlice = createSlice({
       state = { ...state, ...validPayload };
     },
     resetUserInfo: (state) => {
-      state = initialState;
+      for (const [key, value] of Object.entries(state)) {
+        state[key] = null;
+      }
+      //   state = initialState;
     },
     setId: (state, action) => {
       state.id = action.payload;
@@ -44,6 +47,15 @@ export const userInfoSlice = createSlice({
       state.month = action.payload;
       state.day = action.payload;
     },
+    setDay: (state, action) => {
+      state.day = action.payload;
+    },
+    setMonth: (state, action) => {
+      state.month = action.payload;
+    },
+    setYear: (state, action) => {
+      state.year = action.payload;
+    },
     setSex: (state, action) => {
       state.sex = action.payload;
     },
@@ -60,7 +72,19 @@ export const userInfoSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUserInfo, resetUserInfo, setId, setDate, setEmail, setName, setPassword, setPhone, setSex } =
-  userInfoSlice.actions;
+export const {
+  setUserInfo,
+  resetUserInfo,
+  setId,
+  setDate,
+  setEmail,
+  setName,
+  setPassword,
+  setPhone,
+  setSex,
+  setDay,
+  setMonth,
+  setYear,
+} = userInfoSlice.actions;
 
 export default userInfoSlice.reducer;
