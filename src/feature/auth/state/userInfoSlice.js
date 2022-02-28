@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const userInfoSlice = createSlice({
-  name: "login",
+  name: "userInfo",
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
@@ -37,18 +37,18 @@ export const userInfoSlice = createSlice({
       state.password = action.payload;
     },
     setName: (state, action) => {
-      state.name = action.payload.name;
+      state.name = action.payload;
     },
     setDate: (state, action) => {
-      state.year = action.payload.year;
-      state.month = action.payload.month;
-      state.day = action.payload.day;
+      state.year = action.payload;
+      state.month = action.payload;
+      state.day = action.payload;
     },
     setSex: (state, action) => {
-      state.sex = action.payload.sex;
+      state.sex = action.payload;
     },
     setPhone: (state, action) => {
-      state.phaone = action.payload.phone;
+      state.phaone = action.payload;
     },
     // setGpsAgreement: (state, action) => {
     //   state.gpsAgreement = action.payload.gpsAgreement;
