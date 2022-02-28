@@ -9,6 +9,8 @@ import * as A from "../state/userInfoSlice";
 import { request } from "../../../common/api/api";
 import { ButtonComponent } from "../component/ButtonComponent";
 import { InputComponent } from "../component/InputComponent";
+import { Link } from "react-router-dom";
+import { FindComponent } from "../component/FindComponent";
 
 const Login = () => {
   const userSelector = useSelector((state) => {
@@ -45,6 +47,17 @@ const Login = () => {
         ></InputComponent>
         <ButtonComponent title="제출" type="submit"></ButtonComponent>
       </InputFormWrapper>
+      <FindComponent>
+        <Link to="/">
+          <li>아이디찾기</li>
+        </Link>
+        <Link to="/">
+          <li>비밀번호찾기</li>
+        </Link>
+        <Link to="/register">
+          <li>회원가입</li>
+        </Link>
+      </FindComponent>
     </>
   );
 };
