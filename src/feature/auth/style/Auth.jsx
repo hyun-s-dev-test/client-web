@@ -51,11 +51,10 @@ export const StyledWaringMessage = styled.div`
   font-size: 0.8rem;
   width: 100%;
   position: relative;
-  color : red;
-  text-align : center;
+  color: red;
+  text-align: center;
 
   box-sizing: border-box;
-  }
 `;
 export const StyledTitle = styled.label`
   position: relative;
@@ -71,9 +70,8 @@ export const StyledTitle = styled.label`
 export const InputComponentWrapper = styled.div`
   display: relative;
   width: 100%;
-  + div {
-    margin-top: 20px;
-  }
+
+  margin-top: 20px;
 `;
 
 export const StyledSubmitButton = styled.button`
@@ -91,5 +89,33 @@ export const StyledSubmitButton = styled.button`
     font-weight: 700;
     line-height: 24px;
     color: #fff;
+  }
+`;
+
+export const SNSloginWrapper = styled.div`
+  display: relative;
+  width: 100%;
+  text-align: center;
+`;
+
+export const SNSLoginButton = styled.button`
+  display: inline-block;
+  width: 30%;
+  padding: 13px 0 13px;
+  border-radius: 6px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #gray;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-top: 20px;
+  span {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #black;
+  }
+  + button {
+    right: 0;
+    margin-left: 20px;
   }
 `;
