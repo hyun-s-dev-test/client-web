@@ -1,14 +1,12 @@
 import { jsx } from "@emotion/react";
 import { useState } from "react";
 import { InputComponentWrapper, StyledTitle, StyledInput, StyledWaringMessage } from "../style/Auth";
+import { useDispatch } from "react-redux";
 import { validateInput } from "../util/validateInput";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "@emotion/styled";
 
-export const InputComponent = ({ name, type, placeholder, title, validator, action, ...last }) => {
+export const InputComponent = ({ name, type, placeholder, title, validator, action }) => {
   const [inputValue, setInputValue] = useState("");
   const [warningToggle, setWarningToggle] = useState(false);
-
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
     setInputValue(e.target.value);
