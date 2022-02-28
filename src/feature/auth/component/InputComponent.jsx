@@ -13,7 +13,7 @@ export const InputComponent = ({ name, type, placeholder, title, validator, acti
   };
   const onBlurHandler = () => {
     setWarningToggle(true);
-    if (validation?.isValid) dispatch(action(inputValue));
+    validation?.isValid ? dispatch(action(inputValue)) : dispatch(action(null));
   };
   const onFocusHandler = () => {
     setWarningToggle(false);
@@ -39,7 +39,7 @@ export const InputComponent = ({ name, type, placeholder, title, validator, acti
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
       ></StyledInput>
-      {warningToggle ?? !validation?.isValid ? <StyledWaringMessage>{validation?.message}</StyledWaringMessage> : <></>}
+      {warningToggle && !validation?.isValid ? <StyledWaringMessage>{validation?.message}</StyledWaringMessage> : <></>}
     </InputComponentWrapper>
   );
 };
