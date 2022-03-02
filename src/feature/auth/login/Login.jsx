@@ -10,6 +10,7 @@ import * as UserInfo from "../state/userInfoSlice";
 import { request } from "../../../common/api/api";
 import { ButtonComponent } from "../component/ButtonComponent";
 import { InputComponent } from "../component/InputComponent";
+import { InputPassword } from "../component/InputPassword";
 import { Link, Navigate } from "react-router-dom";
 import { FindComponent } from "../component/FindComponent";
 import { useDispatch } from "react-redux";
@@ -35,7 +36,7 @@ const Login = () => {
       //   });
       //   console.log("userAuth 리셋완료");
       dispatch(UserAuth.resetUserInfo());
-      navigate("/register");
+      navigate("/user");
       return;
     }
 
@@ -56,14 +57,14 @@ const Login = () => {
           validator="id"
           action={UserAuth.setId}
         ></InputComponent>
-        <InputComponent
+        <InputPassword
           name="password"
           placeholder="password"
           title="password"
           type="password"
           validator="password"
           action={UserAuth.setPassword}
-        ></InputComponent>
+        ></InputPassword>
         <ButtonComponent title="제출" type="submit"></ButtonComponent>
       </InputFormWrapper>
       <SNSloginWrapper>
@@ -71,10 +72,10 @@ const Login = () => {
         <SNSLogin text="구글" url="api/google"></SNSLogin>
       </SNSloginWrapper>
       <FindComponent>
-        <Link to="/">
+        <Link to="/find/id">
           <li>아이디찾기</li>
         </Link>
-        <Link to="/">
+        <Link to="/find/password">
           <li>비밀번호찾기</li>
         </Link>
         <Link to="/register">
