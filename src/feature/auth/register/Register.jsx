@@ -2,28 +2,45 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import React from "react";
-import { useRef } from "react";
-import { Header, LogoBox, InputFormWrapper, StyledWaringMessage } from "../style/Auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useRe } from "react";
+import { Header, LogoBox, InputFormWrapper } from "../style/Auth";
+import { useSelector } from "react-redux";
 import * as userAuth from "../state/userAuthSlice";
 import { request } from "../../../common/api/api";
 import { ButtonComponent } from "../component/ButtonComponent";
 import { InputComponent } from "../component/InputComponent";
+import { InputPassword } from "../component/InputPassword";
 import { Link } from "react-router-dom";
 import { FindComponent } from "../component/FindComponent";
 import styled from "@emotion/styled";
-import { getDay } from "../util/getDay";
+import { BirthInput } from "./BirthInputComponent";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-const Login = () => {
+const Register = () => {
+  const navigate = useNavigate();
   const userSelector = useSelector((state) => {
-    const { id, password } = state.userAuth;
-    return { id, password };
+    const userRegisterInfo = state.userAuth;
+    return { userRegisterInfo };
   });
+  const dispatch = useDispatch();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(userSelector);
-    userSelector.id && userSelector.password ? console.log("데이터전송") : alert("입력을 정확히!");
-    //  ? request.get
+    const data = {};
+    for (const [key, value] of Object.entries(userSelector.userRegisterInfo)) {
+      if (!value) {
+        alert(`${key} , 빈 값을 채워주세요.`);
+        break;
+      }
+      data[key] = value;
+    }
+    // request.post("url", data).then((res) => {
+    //   if (res.status === 200) {
+    //     alert("로그인성공");
+    //     navigate("login");
+    //   }
+    // });
   };
   return (
     <>
@@ -39,14 +56,14 @@ const Login = () => {
           validator="id"
           action={userAuth.setId}
         ></InputComponent>
-        <InputComponent
+        <InputPassword
           name="password"
           placeholder="password"
           title="비밀번호"
           type="password"
           validator="password"
           action={userAuth.setPassword}
-        ></InputComponent>
+        ></InputPassword>
         <InputComponent
           name="name"
           placeholder="name"
@@ -56,12 +73,12 @@ const Login = () => {
           action={userAuth.setName}
         ></InputComponent>
         <InputComponent
-          name="sex"
-          placeholder="sex"
+          name="gender"
+          placeholder="gender"
           title="성별"
           type="text"
-          validator=""
-          action={userAuth.setSex}
+          validator="gender"
+          action={userAuth.setGender}
         ></InputComponent>
         <InputComponent
           name="phone"
@@ -69,9 +86,10 @@ const Login = () => {
           title="휴대전화"
           type="text"
           validator="phone"
-          action={userAuth.setSex}
+          action={userAuth.setPhone}
         ></InputComponent>
-        <CalenderInput>
+        <BirthInput></BirthInput>
+        {/* <CalenderInput>
           <InputComponent
             name="year"
             placeholder="1999"
@@ -96,16 +114,16 @@ const Login = () => {
             validator="day"
             action={userAuth.setDay}
           ></InputComponent>
-        </CalenderInput>
+        </CalenderInput> */}
         <ButtonComponent title="제출" type="submit"></ButtonComponent>
       </InputFormWrapper>
       <FindComponent>
-        <Link to="/">
+        {/* <Link to="/">
           <li>아이디찾기</li>
         </Link>
         <Link to="/">
           <li>비밀번호찾기</li>
-        </Link>
+        </Link> */}
         <Link to="/">
           <li>로그인</li>
         </Link>
@@ -114,36 +132,12 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
 
-const CalenderWrapper = styled.div`
+export const CalenderWrapper = styled.div`
   display: flex;
   justify-content: center;
   div:not(:first-of-type) {
     margin-left: 20px;
   }
 `;
-
-const CalenderInput = ({ children }) => {
-  const dispatch = useDispatch();
-  const userBirthSelector = useSelector((state) => {
-    const { year, month, day } = state.userAuth;
-    return { year, month, day };
-  });
-  const lastDay = getDay(userBirthSelector.year, userBirthSelector.month);
-  const { year, month, day } = userBirthSelector;
-  //   if (Number(lastDay.day) < Number(userBirthSelector.day)) {
-  //     dispatch(userAuth.setDay(null));
-  //   }
-
-  return (
-    <>
-      <CalenderWrapper>{children}</CalenderWrapper>
-      {Number(lastDay.day) < Number(day) ? (
-        <StyledWaringMessage className="doosan">올바른 날짜가 아닙니다.</StyledWaringMessage>
-      ) : (
-        <></>
-      )}
-    </>
-  );
-};
