@@ -11,7 +11,7 @@ const requestGet = async (url, data) => {
       params: data,
     });
     console.log(res.data);
-    return res.data;
+    return res;
   } catch (err) {
     console.error(err);
   }
@@ -26,7 +26,7 @@ const requestPost = async (url, data) => {
       data: data,
     });
     console.log(res.data);
-    return res.data;
+    return res;
   } catch (err) {
     console.error(err);
   }
@@ -41,7 +41,7 @@ const requestPut = async (url, data) => {
       data: data,
     });
     console.log(res.data);
-    return res.data;
+    return res;
   } catch (err) {
     console.error(err);
   }
@@ -56,7 +56,7 @@ const requestPatch = async (url, data) => {
       data: data,
     });
     console.log(res.data);
-    return res.data;
+    return res;
   } catch (err) {
     console.error(err);
   }
@@ -71,7 +71,7 @@ const requestDelete = async (url, data = null) => {
       data: data,
     });
     console.log(res.data);
-    return res.data;
+    return res;
   } catch (err) {
     console.error(err);
   }
