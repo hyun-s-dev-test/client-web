@@ -75,14 +75,20 @@ export const validateInput = (type) => {
   };
   const year = (input) => {
     const numYear = Number(input) || 0;
-    const isValid = numYear <= 0 ? false : numYear >= new Date().getFullYear() ? false : true;
-    const message = isValid ? "" : "올바른 숫자 네자리를 넣어주세요";
+    const isValid = numYear <= 999 ? false : numYear >= new Date().getFullYear() ? false : true;
+    const message = isValid ? "" : "올바른 년도의 숫자 네자리를 넣어주세요";
     return { isValid, message };
   };
   const month = (input) => {
     const numMonth = Number(input) || 0;
     const isValid = numMonth <= 0 ? false : numMonth > 12 ? false : true;
-    const message = isValid ? "" : "올바른 숫자를 넣어주세요. 예) 3월의 경우 3을 입력해주세요.";
+    const message = isValid ? "" : "올바른 월의 숫자를 넣어주세요. 예) 3월의 경우 3을 입력해주세요.";
+    return { isValid, message };
+  };
+  const gender = (input) => {
+    const genderList = ["남성", "여성", "제3의성", "비공개"];
+    const isValid = genderList.includes(input);
+    const message = isValid ? "" : "남성, 여성, 제3의성, 비공개 중 하나를 입력해주세요.";
     return { isValid, message };
   };
   const day = (input) => {
@@ -108,6 +114,8 @@ export const validateInput = (type) => {
     ? month
     : type === "day"
     ? day
+    : type === "gender"
+    ? gender
     : null;
   //   return { password, id, email, name, phone };
 };
