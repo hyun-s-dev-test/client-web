@@ -2,14 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   id: null,
-  email: null,
+  //   email: null,
   password: null,
   name: null,
   year: null,
   month: null,
   day: null,
-  sex: null,
+  gender: null,
   phone: null,
+  //   valid: false,
 };
 
 export const userAuthSlice = createSlice({
@@ -33,9 +34,9 @@ export const userAuthSlice = createSlice({
     setId: (state, action) => {
       state.id = action.payload;
     },
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
+    // setEmail: (state, action) => {
+    //   state.email = action.payload;
+    // },
     setPassword: (state, action) => {
       state.password = action.payload;
     },
@@ -43,9 +44,12 @@ export const userAuthSlice = createSlice({
       state.name = action.payload;
     },
     setDate: (state, action) => {
-      state.year = action.payload;
-      state.month = action.payload;
-      state.day = action.payload;
+      console.log("action.payload", action.payload);
+      //   state = { ...state, ...action.payload };
+      const { year, month, day } = action.payload;
+      state.year = year;
+      state.month = month;
+      state.day = day;
     },
     setDay: (state, action) => {
       state.day = action.payload;
@@ -56,12 +60,15 @@ export const userAuthSlice = createSlice({
     setYear: (state, action) => {
       state.year = action.payload;
     },
-    setSex: (state, action) => {
-      state.sex = action.payload;
+    setGender: (state, action) => {
+      state.gender = action.payload;
     },
     setPhone: (state, action) => {
-      state.phaone = action.payload;
+      state.phone = action.payload;
     },
+    // setValid: (state, action) => {
+    //   state.valid = action.payload;
+    // },
     // setGpsAgreement: (state, action) => {
     //   state.gpsAgreement = action.payload.gpsAgreement;
     // },
@@ -77,11 +84,11 @@ export const {
   resetUserInfo,
   setId,
   setDate,
-  setEmail,
+  //   setEmail,
   setName,
   setPassword,
   setPhone,
-  setSex,
+  setGender,
   setDay,
   setMonth,
   setYear,

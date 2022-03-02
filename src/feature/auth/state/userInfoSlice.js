@@ -1,4 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { request } from "../../../common/api/api";
+
+const getUser = createAsyncThunk("users/getUser", async (data, thunkAPI) => {
+  const response = await request.get("/user", data);
+  return response.data;
+});
+
+const postUser = createAsyncThunk("users/postUser", async (data, thunkAPI) => {
+  const response = await request.post("/user", data);
+  return response.data;
+});
+
+const patchUser = createAsyncThunk("users/patchUser", async (data, thunkAPI) => {
+  const response = await request.patch("/user", data);
+  return response.data;
+});
 
 const initialState = {
   id: null,
@@ -8,7 +24,7 @@ const initialState = {
   year: null,
   month: null,
   day: null,
-  sex: null,
+  gender: null,
   phone: null,
 };
 
@@ -56,18 +72,24 @@ export const userInfoSlice = createSlice({
     setYear: (state, action) => {
       state.year = action.payload;
     },
-    setSex: (state, action) => {
-      state.sex = action.payload;
+    setGender: (state, action) => {
+      state.gender = action.payload;
     },
     setPhone: (state, action) => {
-      state.phaone = action.payload;
+      state.phone = action.payload;
     },
-    // setGpsAgreement: (state, action) => {
-    //   state.gpsAgreement = action.payload.gpsAgreement;
-    // },
-    // setPromotionAgreement: (state, action) => {
-    //   state.promotionAgreement = action.payload.promotionAgreement;
-    // },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUser.fulfilled, (state, action) => {
+        state = { ...state, ...action.payload };
+      })
+      .addCase(postUser.fulfilled, (state, action) => {
+        state = { ...state, ...action.payload };
+      })
+      .addCase(patchUser.fulfilled, (state, action) => {
+        state = { ...state, ...action.payload };
+      });
   },
 });
 
@@ -81,7 +103,7 @@ export const {
   setName,
   setPassword,
   setPhone,
-  setSex,
+  setGender,
   setDay,
   setMonth,
   setYear,
