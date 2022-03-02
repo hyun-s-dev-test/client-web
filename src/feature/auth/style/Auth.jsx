@@ -94,8 +94,12 @@ export const StyledSubmitButton = styled.button`
 
 export const SNSloginWrapper = styled.div`
   display: relative;
-  width: 100%;
+  width: 460px;
   text-align: center;
+  margin: 0 auto;
+
+    @media (max-width: 600px) {
+    width: 100%;
 `;
 
 export const SNSLoginButton = styled.button`
@@ -117,5 +121,22 @@ export const SNSLoginButton = styled.button`
   + button {
     right: 0;
     margin-left: 20px;
+  }
+`;
+
+export const UserInfoContentBox = styled.div`
+  font-size: 1rem;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #dcd9d9;
+  border-radius: 6px;
+  position: relative;
+  margin-bottom: 20px;
+
+  padding: 13px 0 13px 10px;
+  box-sizing: border-box;
+
+  :focus {
+    outline: 1px solid #03c75a;
   }
 `;
