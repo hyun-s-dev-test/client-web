@@ -5,7 +5,7 @@ import { validateInput } from "../util/validateInput";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 
-export const InputComponent = ({ name, type, placeholder, title, validator, action, ...last }) => {
+export const InputComponent = ({ name, type, placeholder, title, validator, action, defaultValue, ...last }) => {
   const [inputValue, setInputValue] = useState("");
   const [warningToggle, setWarningToggle] = useState(false);
 
