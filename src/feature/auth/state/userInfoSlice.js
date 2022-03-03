@@ -1,22 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { request } from "../../../common/api/api";
 
-const getUser = createAsyncThunk("users/getUser", async (data, thunkAPI) => {
+export const getUser = createAsyncThunk("users/getUser", async (data, thunkAPI) => {
   const response = await request.get("/user", data);
   return response.data;
 });
 
-const postUser = createAsyncThunk("users/postUser", async (data, thunkAPI) => {
+export const postUser = createAsyncThunk("users/postUser", async (data, thunkAPI) => {
   const response = await request.post("/user", data);
   return response.data;
 });
 
-const patchUser = createAsyncThunk("users/patchUser", async (data, thunkAPI) => {
+export const patchUser = createAsyncThunk("users/patchUser", async (data, thunkAPI) => {
   const response = await request.patch("/user", data);
   return response.data;
 });
 
-const initialState = {
+export const initialState = {
   id: null,
   email: null,
   password: null,

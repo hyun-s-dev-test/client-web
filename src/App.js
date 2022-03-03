@@ -9,6 +9,7 @@ import FindPw from "./feature/auth/find/FindPw";
 import FindId from "./feature/auth/find/FindId";
 import UserInfo from "./feature/auth/userInfo/UserInfo";
 import UserInfoUpdate from "./feature/auth/userInfo/UserInfoUpdate";
+import Agreement from "./feature/auth/register/Agreement";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route element={<Login />} path="/" />
         <Route element={<Register />} path="/register"></Route>
+        <Route element={<Agreement />} path="/agreement"></Route>
         <Route element={<FindPw />} path="/find/password"></Route>
         <Route element={<FindId />} path="/find/id"></Route>
         <Route element={<UserInfo />} path="/user"></Route>

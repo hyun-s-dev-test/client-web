@@ -45,7 +45,7 @@ const Register = () => {
   return (
     <>
       <Header>
-        <LogoBox>두산</LogoBox>
+        <LogoBox>회원 가입</LogoBox>
       </Header>
       <InputFormWrapper onSubmit={onSubmitHandler}>
         <InputComponent

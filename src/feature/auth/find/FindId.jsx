@@ -94,7 +94,7 @@ const FindId = () => {
             <Link to="/find/password">
               <li>비밀번호찾기</li>
             </Link>
-            <Link to="/register">
+            <Link to="/agreement">
               <li>회원가입</li>
             </Link>
           </FindComponent>

@@ -10,6 +10,7 @@ const initialState = {
   day: null,
   gender: null,
   phone: null,
+  agreement: { default: true },
   //   valid: false,
 };
 
@@ -66,15 +67,9 @@ export const userAuthSlice = createSlice({
     setPhone: (state, action) => {
       state.phone = action.payload;
     },
-    // setValid: (state, action) => {
-    //   state.valid = action.payload;
-    // },
-    // setGpsAgreement: (state, action) => {
-    //   state.gpsAgreement = action.payload.gpsAgreement;
-    // },
-    // setPromotionAgreement: (state, action) => {
-    //   state.promotionAgreement = action.payload.promotionAgreement;
-    // },
+    setAgreement: (state, action) => {
+      state.agreement = action.payload;
+    },
   },
 });
 
@@ -92,6 +87,7 @@ export const {
   setDay,
   setMonth,
   setYear,
+  setAgreement,
 } = userAuthSlice.actions;
 
 export default userAuthSlice.reducer;

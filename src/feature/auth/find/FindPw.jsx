@@ -94,7 +94,7 @@ const FindPw = () => {
             <Link to="/find/id">
               <li>아이디찾기</li>
             </Link>
-            <Link to="/register">
+            <Link to="/agreement">
               <li>회원가입</li>
             </Link>
           </FindComponent>
