@@ -33,7 +33,7 @@ jobs: # Job 설정
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         # 여기에서 S3버킷이름, 폴더이름을 바꿔주세요! 혹시 aws리전이 다르면 리전도 바꿔주세요.
         run: |
-          aws s3 cp --region ap-northeast-2 ./build-client.zip s3://build-client/build-client.zip**
+          aws s3 cp --region ap-northeast-2 ./build-client.zip s3://build-client/build-client.zip
       - name: Deploy # Deploy to EC2
         run: aws deploy create-deployment
           --application-name login-client
