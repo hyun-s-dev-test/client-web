@@ -39,4 +39,4 @@ jobs: # Job 설정
           --application-name login-client
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name client-deploy-group
-          --s3-location bucket=**S3버킷이름**,key=build-client.zip,bundleType=zip
+          --s3-location bucket=build-client,key=build-client.zip,bundleType=zip
