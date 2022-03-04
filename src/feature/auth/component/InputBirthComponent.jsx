@@ -1,8 +1,8 @@
-import { jsx } from "@emotion/react";
-import { useState } from "react";
+// import { jsx } from "@emotion/react";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { validateInput } from "../util/validateInput";
 import { InputComponentWrapper, StyledTitle, StyledInput, StyledWaringMessage } from "../style/Auth";
-import { useDispatch } from "react-redux";
-import { validateInput } from "../util/validateInput";
 
 export const InputBirthComponent = ({
   name,

@@ -1,21 +1,21 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import React from "react";
-import { useRef } from "react";
-import { Header, LogoBox, InputFormWrapper, SNSloginWrapper } from "../style/Auth";
-import { useSelector } from "react-redux";
-import * as UserAuth from "../state/userAuthSlice";
-import * as UserInfo from "../state/userInfoSlice";
-import { request } from "../../../common/api/api";
-import { ButtonComponent } from "../component/ButtonComponent";
-import { InputComponent } from "../component/InputComponent";
+// import React from "react";
+// import { useRef } from "react";
+// import { Header, LogoBox, InputFormWrapper, SNSloginWrapper } from "../style/Auth";
+// import { useSelector } from "react-redux";
+// import * as UserAuth from "../state/userAuthSlice";
+// import * as UserInfo from "../state/userInfoSlice";
+// import { request } from "../../../common/api/api";
+// import { ButtonComponent } from "../component/ButtonComponent";
+// import { InputComponent } from "../component/InputComponent";
+// import { FindComponent } from "../component/FindComponent";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { SNSLogin } from "../component/SNSLogin";
 import { Link, Navigate } from "react-router-dom";
-import { FindComponent } from "../component/FindComponent";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { SNSLogin } from "../component/SNSLogin";
 
 const MessageComponent = ({ isOk, title, content, isMessageOn, setIsMessageOn, isPw }) => {
   const onCloseModalHandler = () => {

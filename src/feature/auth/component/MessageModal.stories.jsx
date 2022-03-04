@@ -15,11 +15,24 @@ Default.args = {
   isMessageOn: true,
   title: "default",
   isOk: true,
+  content: "default",
+  isPw: true,
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const FindId = Template.bind({});
+FindId.args = {
   isMessageOn: true,
-  title: "secondary",
+  title: "아이디 찾아라",
+  content: "아이디 여기에 뜬다",
   isOk: false,
+  isPw: true,
+};
+
+export const FindPassword = Template.bind({});
+FindPassword.args = {
+  isMessageOn: true,
+  title: "비밀번호를 찾아라",
+  content: "비밀번호 여기에 뜬다",
+  isOk: false,
+  isPw: false,
 };

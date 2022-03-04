@@ -23,12 +23,14 @@ id.args = {
   setWarningToggle: "setWarningToggle",
 };
 
-export const Phone = Template.bind({});
-Phone.args = {
-  name: "phone",
+export const Year = Template.bind({});
+Year.args = {
+  name: "year",
+  placeholder: "1999",
+  title: "생년",
   type: "text",
-  placeholder: "폰번호",
-  title: "타이틀",
-  validator: "phone",
-  action: UserAuth.setPhone,
+  defaultValue: "초기값",
+  inputValue: `{birthYear}`,
+  setInputValue: `{setBirthYear}`,
+  setWarningToggle: `{setWarningToggle}`,
 };

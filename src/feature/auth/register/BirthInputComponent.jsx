@@ -9,30 +9,6 @@ import { InputBirthComponent } from "../component/InputBirthComponent";
 import { validateInput } from "../util/validateInput";
 import { CalenderWrapper } from "./Register";
 
-// const CalenderInput = ({ children }) => {
-//   const dispatch = useDispatch();
-//   const [isValidDate, setIsValidDate] = useState(true);
-//   const userBirthSelector = useSelector((state) => {
-//     const { year, month, day } = state.userAuth;
-//     return { year, month, day };
-//   });
-//   const lastDay = getDay(userBirthSelector.year, userBirthSelector.month);
-//   const { year, month, day } = userBirthSelector;
-//   //   if (Number(lastDay.day) < Number(userBirthSelector.day)) {
-//   //     dispatch(userAuth.setDay(null));
-//   //   }
-//   if (!year || !month || !day) setIsValidDate(false);
-//   return (
-//     <>
-//       <CalenderWrapper>{children}</CalenderWrapper>
-//       {Number(lastDay.day) < Number(day) ? (
-//         <StyledWaringMessage className="doosan">올바른 날짜가 아닙니다.</StyledWaringMessage>
-//       ) : (
-//         <></>
-//       )}
-//     </>
-//   );
-// };
 export const BirthInput = ({ defaultValue }) => {
   const dispatch = useDispatch();
   const [birthYear, setBirthYear] = useState("");
