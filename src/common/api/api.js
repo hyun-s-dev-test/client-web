@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const baseURL = process.env.REACT_APP_API_URL;
 
-const requestGet = async (url, data) => {
+const requestGet = async (url, data = null) => {
   try {
     const res = await axios({
       // baseURL,
@@ -17,7 +17,7 @@ const requestGet = async (url, data) => {
   }
 };
 
-const requestPost = async (url, data) => {
+const requestPost = async (url, data = null) => {
   try {
     const res = await axios({
       // baseURL,
@@ -32,7 +32,7 @@ const requestPost = async (url, data) => {
   }
 };
 
-const requestPut = async (url, data) => {
+const requestPut = async (url, data = null) => {
   try {
     const res = await axios({
       // baseURL,
@@ -47,7 +47,7 @@ const requestPut = async (url, data) => {
   }
 };
 
-const requestPatch = async (url, data) => {
+const requestPatch = async (url, data = null) => {
   try {
     const res = await axios({
       // baseURL,
