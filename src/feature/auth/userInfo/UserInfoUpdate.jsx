@@ -6,6 +6,7 @@ import { useRe } from "react";
 import { Header, LogoBox, InputFormWrapper } from "../style/Auth";
 import { useSelector } from "react-redux";
 import * as userAuth from "../state/userAuthSlice";
+import * as userInfo from "../state/userInfoSlice";
 import { request } from "../../../common/api/api";
 import { ButtonComponent } from "../component/ButtonComponent";
 import { InputComponent } from "../component/InputComponent";
@@ -37,17 +38,30 @@ const UserInfoUpdate = () => {
   const { id, password, name, gender, phone, year, month, day } = userInfoSelector.userInfo;
   const birth = { year, month, day };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(userSelector);
     const data = {};
     for (const [key, value] of Object.entries(userSelector.userUpdateInfo)) {
       if (!value) {
         alert(`${key} , 빈 값을 채워주세요.`);
-        break;
+        return;
       }
       data[key] = value;
-      console.log(1212);
+      const birth = `${data.year}-${data.month}-${data.day}`;
+      data.birth = birth;
+    }
+    try {
+      const response = await dispatch(userInfo.patchUser({ url: "'api/user", data })).unwrap();
+      console.log(response);
+      alert("회원정보 수정이 완료되었습니다.");
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert("중복된 id입니다.");
+      return;
+
+      // handle error here
     }
   };
 
