@@ -49,14 +49,14 @@ export const userAuthSlice = createSlice({
       //   state = { ...state, ...action.payload };
       const { year, month, day } = action.payload;
       state.year = year;
-      state.month = month;
-      state.day = day;
+      state.month = month.length === 1 ? `0${month}` : month;
+      state.day = day.length === 1 ? `0${day}` : day;
     },
     setDay: (state, action) => {
-      state.day = action.payload;
+      state.day = action.payload.length === 1 ? `0${action.payload}` : action.payload;
     },
     setMonth: (state, action) => {
-      state.month = action.payload;
+      state.month = action.payload.length === 1 ? `0${action.payload}` : action.payload;
     },
     setYear: (state, action) => {
       state.year = action.payload;

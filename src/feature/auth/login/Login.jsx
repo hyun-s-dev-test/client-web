@@ -25,19 +25,26 @@ const Login = () => {
     return { id, password };
   });
   const dispatch = useDispatch();
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(userSelector);
     if (userSelector.id && userSelector.password) {
       console.log("데이터전송");
-      //   request.get("url", userSelector).then((data) => {
-      //     dispatch(UserInfo.setUserInfo(data));
-      //     navigate("/");
-      //   });
-      //   console.log("userAuth 리셋완료");
+      const data = { id: userSelector.id, password: userSelector.password };
+      const url = "/api/user/login";
+      try {
+        const response = await dispatch(UserInfo.userLogin({ url, data })).unwrap();
+        console.log(response);
+        // localStorage.setItem(response.) //pk 넣자
+        alert("로그인 성공!");
+        navigate("/user");
+      } catch (err) {
+        console.error(err);
+        alert("로그인이 실패하였습니다.");
+        return;
+      }
+
       dispatch(UserAuth.resetUserInfo());
-      console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL);
-      navigate("/user");
       return;
     }
 

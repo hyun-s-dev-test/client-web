@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { request } from "../../../common/api/api";
 
-export const getUser = createAsyncThunk("userInfo/getUser", async (data, { rejectWithValue }) => {
+export const userLogin = createAsyncThunk("userInfo/userLogin", async ({ url, data }, { rejectWithValue }) => {
   try {
-    const response = await request.get("/api/user", data);
+    const response = await request.post(url, data);
     return response.data;
   } catch (err) {
     let error = err; // cast the error for access
@@ -14,9 +14,9 @@ export const getUser = createAsyncThunk("userInfo/getUser", async (data, { rejec
   }
 });
 
-export const postUser = createAsyncThunk("userInfo/postUser", async (data, { rejectWithValue }) => {
+export const getUser = createAsyncThunk("userInfo/getUser", async ({ url, data }, { rejectWithValue }) => {
   try {
-    const response = await request.post("/api/user", data);
+    const response = await request.get(url, data);
     return response.data;
   } catch (err) {
     let error = err; // cast the error for access
@@ -27,9 +27,22 @@ export const postUser = createAsyncThunk("userInfo/postUser", async (data, { rej
   }
 });
 
-export const patchUser = createAsyncThunk("userInfo/patchUser", async (data, { rejectWithValue }) => {
+export const postUser = createAsyncThunk("userInfo/postUser", async ({ url, data }, { rejectWithValue }) => {
   try {
-    const response = await request.patch("/api/user", data);
+    const response = await request.post(url, data);
+    return response.data;
+  } catch (err) {
+    let error = err; // cast the error for access
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const patchUser = createAsyncThunk("userInfo/patchUser", async ({ url, data }, { rejectWithValue }) => {
+  try {
+    const response = await request.patch(url, data);
     return response.data;
   } catch (err) {
     let error = err; // cast the error for access
@@ -106,6 +119,17 @@ export const userInfoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(userLogin.fulfilled, (state, action) => {
+      state = { ...state, ...action.payload };
+    });
+    builder.addCase(userLogin.rejected, (state, action) => {
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload.errorMessage;
+      } else {
+        state.error = action.error.message;
+      }
+    });
     builder.addCase(getUser.fulfilled, (state, action) => {
       state = { ...state, ...action.payload };
     });
