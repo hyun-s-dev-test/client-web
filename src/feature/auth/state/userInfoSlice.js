@@ -4,7 +4,9 @@ import { request } from "../../../common/api/api";
 export const userLogin = createAsyncThunk("userInfo/userLogin", async ({ url, data }, { rejectWithValue }) => {
   try {
     const response = await request.post(url, data);
-    return response.data;
+    const birthDate = response.data.birth.split("-");
+    const newData = { ...response.data, year: birthDate[0], month: birthDate[1], day: birthDate[2] };
+    return newData;
   } catch (err) {
     let error = err; // cast the error for access
     if (!error.response) {
