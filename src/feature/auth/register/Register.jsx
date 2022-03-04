@@ -36,10 +36,12 @@ const Register = () => {
         return;
       }
       data[key] = value;
+      const birth = `${data.year}-${data.month}-${data.day}`;
+      data.birth = birth;
     }
     console.log("data", data);
     try {
-      const response = await dispatch(userInfo.postUser(data)).unwrap();
+      const response = await dispatch(userInfo.postUser({ url: "'api/user", data })).unwrap();
       console.log(response);
       alert("회원가입이 완료되었습니다.");
       navigate("/");
