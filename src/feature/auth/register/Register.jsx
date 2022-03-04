@@ -6,6 +6,7 @@ import { useRe } from "react";
 import { Header, LogoBox, InputFormWrapper } from "../style/Auth";
 import { useSelector } from "react-redux";
 import * as userAuth from "../state/userAuthSlice";
+import * as userInfo from "../state/userInfoSlice";
 import { request } from "../../../common/api/api";
 import { ButtonComponent } from "../component/ButtonComponent";
 import { InputComponent } from "../component/InputComponent";
@@ -24,17 +25,33 @@ const Register = () => {
     return { userRegisterInfo };
   });
   const dispatch = useDispatch();
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(userSelector);
     const data = {};
     for (const [key, value] of Object.entries(userSelector.userRegisterInfo)) {
       if (!value) {
         alert(`${key} , 빈 값을 채워주세요.`);
-        break;
+        // break;
+        return;
       }
       data[key] = value;
     }
+    console.log("data", data);
+    try {
+      const response = await dispatch(userInfo.postUser(data)).unwrap();
+      console.log(response);
+      alert("회원가입이 완료되었습니다.");
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert("중복된 id입니다.");
+      return;
+
+      // handle error here
+    }
+    console.log("패칭성공");
+    // localStorage.setItem({userId : })
     // request.post("url", data).then((res) => {
     //   if (res.status === 200) {
     //     alert("로그인성공");

@@ -36,6 +36,7 @@ const Login = () => {
       //   });
       //   console.log("userAuth 리셋완료");
       dispatch(UserAuth.resetUserInfo());
+      console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL);
       navigate("/user");
       return;
     }

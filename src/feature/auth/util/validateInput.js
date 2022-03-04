@@ -86,9 +86,10 @@ export const validateInput = (type) => {
     return { isValid, message };
   };
   const gender = (input) => {
-    const genderList = ["남성", "여성", "제3의성", "비공개"];
+    // const genderList = ["남성", "여성", "제3의성", "비공개"];
+    const genderList = ["남성", "여성"];
     const isValid = genderList.includes(input);
-    const message = isValid ? "" : "남성, 여성, 제3의성, 비공개 중 하나를 입력해주세요.";
+    const message = isValid ? "" : "남성, 여성 중 하나를 입력해주세요.";
     return { isValid, message };
   };
   const day = (input) => {

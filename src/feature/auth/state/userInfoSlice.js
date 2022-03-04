@@ -1,22 +1,47 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { request } from "../../../common/api/api";
 
-export const getUser = createAsyncThunk("users/getUser", async (data, thunkAPI) => {
-  const response = await request.get("/user", data);
-  return response.data;
+export const getUser = createAsyncThunk("userInfo/getUser", async (data, { rejectWithValue }) => {
+  try {
+    const response = await request.get("/api/user", data);
+    return response.data;
+  } catch (err) {
+    let error = err; // cast the error for access
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
 });
 
-export const postUser = createAsyncThunk("users/postUser", async (data, thunkAPI) => {
-  const response = await request.post("/user", data);
-  return response.data;
+export const postUser = createAsyncThunk("userInfo/postUser", async (data, { rejectWithValue }) => {
+  try {
+    const response = await request.post("/api/user", data);
+    return response.data;
+  } catch (err) {
+    let error = err; // cast the error for access
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
 });
 
-export const patchUser = createAsyncThunk("users/patchUser", async (data, thunkAPI) => {
-  const response = await request.patch("/user", data);
-  return response.data;
+export const patchUser = createAsyncThunk("userInfo/patchUser", async (data, { rejectWithValue }) => {
+  try {
+    const response = await request.patch("/api/user", data);
+    return response.data;
+  } catch (err) {
+    let error = err; // cast the error for access
+    if (!error.response) {
+      throw err;
+    }
+    return rejectWithValue(error.response.data);
+  }
 });
 
 export const initialState = {
+  pk: null,
   id: null,
   email: null,
   password: null,
@@ -26,6 +51,7 @@ export const initialState = {
   day: null,
   gender: null,
   phone: null,
+  error: null,
 };
 
 export const userInfoSlice = createSlice({
@@ -80,16 +106,39 @@ export const userInfoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getUser.fulfilled, (state, action) => {
-        state = { ...state, ...action.payload };
-      })
-      .addCase(postUser.fulfilled, (state, action) => {
-        state = { ...state, ...action.payload };
-      })
-      .addCase(patchUser.fulfilled, (state, action) => {
-        state = { ...state, ...action.payload };
-      });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      state = { ...state, ...action.payload };
+    });
+    builder.addCase(getUser.rejected, (state, action) => {
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload.errorMessage;
+      } else {
+        state.error = action.error.message;
+      }
+    });
+    builder.addCase(postUser.fulfilled, (state, action) => {
+      state.pk = action.payload;
+    });
+    builder.addCase(postUser.rejected, (state, action) => {
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload.errorMessage;
+      } else {
+        state.error = action.error.message;
+      }
+    });
+    builder.addCase(patchUser.fulfilled, (state, action) => {
+      state = { ...state, ...action.payload };
+    });
+    builder.addCase(patchUser.rejected, (state, action) => {
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload.errorMessage;
+      } else {
+        state.error = action.error.message;
+      }
+    });
   },
 });
 

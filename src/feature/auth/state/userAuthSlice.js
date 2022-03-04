@@ -62,7 +62,8 @@ export const userAuthSlice = createSlice({
       state.year = action.payload;
     },
     setGender: (state, action) => {
-      state.gender = action.payload;
+      if (action.payload === "남성") state.gender = "M";
+      if (action.payload === "여성") state.gender = "F";
     },
     setPhone: (state, action) => {
       state.phone = action.payload;
