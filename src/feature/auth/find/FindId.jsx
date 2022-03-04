@@ -24,15 +24,15 @@ const FindId = () => {
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
   const userSelector = useSelector((state) => {
-    const { id, name } = state.userAuth;
-    return { id, name };
+    const { phone, name } = state.userAuth;
+    return { phone, name };
   });
   const { id, name } = useSelector;
   const dispatch = useDispatch();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log("userSelector", userSelector);
-    if (userSelector.id && userSelector.name) {
+    if (userSelector.phone && userSelector.name) {
       console.log("데이터전송");
       //   request.get("url", userSelector).then((data) => {
       //     dispatch(UserInfo.setUserInfo(data));

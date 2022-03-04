@@ -21,6 +21,7 @@ const MessageComponent = ({ isOk, title, content, isMessageOn, setIsMessageOn, i
   const onCloseModalHandler = () => {
     setIsMessageOn(false);
   };
+  console.log("isOk", isPw);
   return (
     <MessageWrapper isMessageOn={isMessageOn}>
       <ModalBackground onClick={onCloseModalHandler}></ModalBackground>
@@ -31,7 +32,7 @@ const MessageComponent = ({ isOk, title, content, isMessageOn, setIsMessageOn, i
         <Link to="/">
           <div>로그인</div>
         </Link>
-        {isPw ? (
+        {!isPw ? (
           <Link to="/find/id">
             <div>아이디찾기</div>
           </Link>
