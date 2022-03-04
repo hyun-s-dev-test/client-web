@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { SNSLogin } from "../component/SNSLogin";
+import { Cookies } from "react-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Login = () => {
     return { id, password };
   });
   const dispatch = useDispatch();
+  const cookies = new Cookies();
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(userSelector);
@@ -33,11 +35,14 @@ const Login = () => {
       const data = { id: userSelector.id, password: userSelector.password };
       const url = "/api/user/login";
       try {
-        const response = await dispatch(UserInfo.userLogin({ url, data })).unwrap();
-        console.log(response);
+        const response = await request.post(url, data);
+        console.log("response", response);
+        console.log("cookie", cookies.getAll());
+        // response.
+
         // localStorage.setItem(response.) //pk 넣자
         alert("로그인 성공!");
-        navigate("/user");
+        // navigate("/user");
       } catch (err) {
         console.error(err);
         alert("로그인이 실패하였습니다.");

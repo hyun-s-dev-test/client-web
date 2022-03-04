@@ -8,7 +8,7 @@ const initialState = {
   year: null,
   month: null,
   day: null,
-  birth: null,
+  // birth: null,
   gender: null,
   phone: null,
   agreement: { default: true },

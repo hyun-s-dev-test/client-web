@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRe } from "react";
 import { Header, LogoBox, InputFormWrapper } from "../style/Auth";
 import { useSelector } from "react-redux";
@@ -25,6 +25,10 @@ const Register = () => {
     return { userRegisterInfo };
   });
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   return dispatch(userAuth.resetUserInfo());
+  // }, []);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(userSelector);
@@ -41,7 +45,7 @@ const Register = () => {
     }
     console.log("data", data);
     try {
-      const response = await dispatch(userInfo.postUser({ url: "'api/user", data })).unwrap();
+      const response = await dispatch(userInfo.postUser({ url: "api/user", data })).unwrap();
       console.log(response);
       alert("회원가입이 완료되었습니다.");
       navigate("/");
