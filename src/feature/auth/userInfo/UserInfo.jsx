@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRe } from "react";
 import { Header, LogoBox, InputFormWrapper, UserInfoContentBox, StyledSubmitButton } from "../style/Auth";
 import { useSelector } from "react-redux";
@@ -17,13 +17,32 @@ import styled from "@emotion/styled";
 import { BirthInput } from "../register/BirthInputComponent";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Cookies } from "react-cookie";
 
 const UserInfo = () => {
+  const cookies = new Cookies();
   const navigate = useNavigate();
   const userSelector = useSelector((state) => {
     const userInfo = state.userInfo;
     return { userInfo };
   });
+
+  useEffect(()=>{
+    const id = cookies.get("userId");
+    const url = `/api/user/${id}`
+    const fetchFunc = async () => {
+      try {
+        const response = await dispatch(userInfo.getUser(url));
+      } catch (err) {
+        console.error(err);
+        alert("중복된 id입니다.");
+        return;
+
+        // handle error here
+      }
+
+    }
+  })
 
   const { name, id, email, password, phone, year, month, day, gender } = userSelector.userInfo;
   const birth = `${year}년 ${month}월 ${day}일`;
