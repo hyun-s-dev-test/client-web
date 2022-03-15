@@ -37,7 +37,8 @@ const Login = () => {
       try {
         const response = await request.post(url, data);
         console.log("response", response);
-        console.log("cookie", cookies.getAll());
+        const a = document.cookie;
+        console.log("cookie", a);
         // response.
 
         // localStorage.setItem(response.) //pk 넣자
