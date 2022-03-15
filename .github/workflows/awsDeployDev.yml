@@ -39,4 +39,4 @@ jobs: # Job 설정
           --application-name client-web-dev
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name client-web-dev-group
-          --s3-location bucket=build-client,key=build-client-web.dev.zip,bundleType=zip
+          --s3-location bucket=build-client,key=build-client-web-dev.zip,bundleType=zip
