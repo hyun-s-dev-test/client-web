@@ -23,7 +23,7 @@ export const userAuthSlice = createSlice({
       // const { id, email, password, name, year, month, day, sex, phone } = action.payload;
       const validPayload = {};
       for (const [key, value] of Object.entries(action.payload)) {
-        value ?? (validPayload[key] = value);
+        if (value) validPayload[key] = value;
       }
       state = { ...state, ...validPayload };
     },
@@ -67,6 +67,8 @@ export const userAuthSlice = createSlice({
       if (action.payload === "여성") state.gender = "F";
     },
     setPhone: (state, action) => {
+      // const phoneNumber = action.payload.split("-").join("");
+      // state.phone = phoneNumber;
       state.phone = action.payload;
     },
     setAgreement: (state, action) => {
