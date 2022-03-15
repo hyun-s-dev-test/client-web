@@ -1,0 +1,42 @@
+name: Deploy # Workflow 이름
+on: # Event 감지
+  push:
+    branches:
+      - dev # 마스터 브랜치의 푸쉬가 일어날 때 CI/CD를 진행하겠다는 뜻
+jobs: # Job 설정
+  build:
+    # 내 EC2는 CentOS라서 바꿔야 할 것 같지만, 여기는 아래 상태로 둔다.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code. # Repo checkout
+        uses: actions/checkout@v2
+      - name: Check Node v # Node v 확인
+        run: node -v
+      - name: Install Dependencies # 의존 파일 설치
+        run: npm install --frozen-lockfile
+      - name: Build # React Build
+        run: npm run build
+      - name: zip create
+        # zip 파일을 만듭니다(파일명은 자유, 대신 아래 workflow에 적을 파일명과 동일하게 맞춰주세요).
+        run: zip -qq -r ./build-client-web-dev.zip .
+        shell: bash
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          # 아래 볼드 표시한 부분을 깃헙 리파지토리에서 지정한 이름으로 작성해주세요!
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Upload to S3 # Upload build file to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # 여기에서 S3버킷이름, 폴더이름을 바꿔주세요! 혹시 aws리전이 다르면 리전도 바꿔주세요.
+        run: |
+          aws s3 cp --region ap-northeast-2 ./build-client-web-dev.zip s3://build-client/build-client-web-dev.zip
+      - name: Deploy # Deploy to EC2
+        run: aws deploy create-deployment
+          --application-name client-web-dev
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name client-web-dev-group
+          --s3-location bucket=build-client,key=build-client-web.dev.zip,bundleType=zip
