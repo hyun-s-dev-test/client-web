@@ -11,7 +11,12 @@ const initialState = {
   // birth: null,
   gender: null,
   phone: null,
-  agreement: { default: true },
+  agreement: {
+    termsOfService: true,
+    privatePolicy: true,
+    userLocation: false,
+    receivePromotion: false,
+  },
   //   valid: false,
 };
 
@@ -19,17 +24,38 @@ export const userAuthSlice = createSlice({
   name: "userAuth",
   initialState,
   reducers: {
+    // setUserInfo: (state, action) => {
+    //   // const { id, email, password, name, year, month, day, sex, phone } = action.payload;
+    //   const validPayload = {};
+    //   for (const [key, value] of Object.entries(action.payload)) {
+    //     if (value) validPayload[key] = value;
+    //   }
+    //   state = { ...state, ...validPayload };
+    // },
     setUserInfo: (state, action) => {
-      // const { id, email, password, name, year, month, day, sex, phone } = action.payload;
-      const validPayload = {};
-      for (const [key, value] of Object.entries(action.payload)) {
-        if (value) validPayload[key] = value;
-      }
-      state = { ...state, ...validPayload };
+      const { id, password, name, year, month, day, phone, gender } = action.payload;
+      let genderTemp;
+      if (gender === "남성" || gender === "M") genderTemp = "M";
+      if (gender === "여성" || gender === "F") genderTemp = "F";
+
+      state.id = id;
+      state.password = password;
+      state.name = name;
+      state.year = year;
+      state.month = month.length === 1 ? `0${month}` : month;
+      state.day = day.length === 1 ? `0${day}` : day;
+      state.phone = phone;
+      state.gender = genderTemp;
     },
     resetUserInfo: (state) => {
       for (const [key, value] of Object.entries(state)) {
         state[key] = null;
+        state.agreement = {
+          termsOfService: true,
+          privatePolicy: true,
+          userLocation: false,
+          receivePromotion: false,
+        };
       }
       //   state = initialState;
     },

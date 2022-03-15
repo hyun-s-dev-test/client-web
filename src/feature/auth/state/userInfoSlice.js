@@ -75,15 +75,34 @@ export const userInfoSlice = createSlice({
   reducers: {
     setUserInfo: (state, action) => {
       // const { id, email, password, name, year, month, day, sex, phone } = action.payload;
-      const validPayload = {};
-      for (const [key, value] of Object.entries(action.payload)) {
-        value ?? (validPayload[key] = value);
-      }
-      state = { ...state, ...validPayload };
+      //   const validPayload = {};
+      //   for (const [key, value] of Object.entries(action.payload)) {
+      //     value ?? (validPayload[key] = value);
+      //   }
+      //   state = {...state, ...validPayload};
+      const { id, password, name, year, month, day, phone, gender } = action.payload;
+      let genderTemp;
+      if (gender === "남성" || gender === "M") genderTemp = "M";
+      if (gender === "여성" || gender === "F") genderTemp = "F";
+
+      state.id = id;
+      state.password = password;
+      state.name = name;
+      state.year = year;
+      state.month = month.length === 1 ? `0${month}` : month;
+      state.day = day.length === 1 ? `0${day}` : day;
+      state.phone = phone;
+      state.gender = genderTemp;
     },
     resetUserInfo: (state) => {
       for (const [key, value] of Object.entries(state)) {
         state[key] = null;
+        state.agreement = {
+          termsOfService: true,
+          privatePolicy: true,
+          userLocation: false,
+          receivePromotion: false,
+        };
       }
       //   state = initialState;
     },
@@ -127,7 +146,7 @@ export const userInfoSlice = createSlice({
     builder.addCase(userLogin.rejected, (state, action) => {
       if (action.payload) {
         // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
-        state.error = action.payload.errorMessage;
+        state.error = action.payload;
       } else {
         state.error = action.error.message;
       }
@@ -138,7 +157,7 @@ export const userInfoSlice = createSlice({
     builder.addCase(getUser.rejected, (state, action) => {
       if (action.payload) {
         // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
-        state.error = action.payload.errorMessage;
+        state.error = action.payload;
       } else {
         state.error = action.error.message;
       }
@@ -149,7 +168,7 @@ export const userInfoSlice = createSlice({
     builder.addCase(postUser.rejected, (state, action) => {
       if (action.payload) {
         // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
-        state.error = action.payload.errorMessage;
+        state.error = action.payload;
       } else {
         state.error = action.error.message;
       }
@@ -160,7 +179,7 @@ export const userInfoSlice = createSlice({
     builder.addCase(patchUser.rejected, (state, action) => {
       if (action.payload) {
         // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
-        state.error = action.payload.errorMessage;
+        state.error = action.payload;
       } else {
         state.error = action.error.message;
       }
