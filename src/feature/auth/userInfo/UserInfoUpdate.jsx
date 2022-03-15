@@ -32,10 +32,10 @@ const UserInfoUpdate = () => {
 
   useEffect(() => {
     dispatch(userAuth.setUserInfo(userInfoSelector.userInfo));
-    return dispatch(userAuth.resetUserInfo());
   }, []);
 
   const { id, password, name, gender, phone, year, month, day } = userInfoSelector.userInfo;
+  console.log("121212", userInfoSelector.userInfo);
   const birth = { year, month, day };
 
   const onSubmitHandler = async (e) => {

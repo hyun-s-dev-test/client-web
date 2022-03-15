@@ -35,10 +35,10 @@ const Login = () => {
       const data = { id: userSelector.id, password: userSelector.password };
       const url = "/api/user/login";
       try {
-        const response = await request.post(url, data);
-        console.log("response", response);
-        Cookies.set("userId", response.data);
-        localStorage.setItem("userId", response.data);
+        // const response = await request.post(url, data);
+        // console.log("response", response);
+        // Cookies.set("userId", response.data);
+        // localStorage.setItem("userId", response.data);
         alert("로그인 성공!");
         navigate("/user");
       } catch (err) {

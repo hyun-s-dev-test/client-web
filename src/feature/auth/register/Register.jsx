@@ -45,8 +45,9 @@ const Register = () => {
     }
     console.log("data", data);
     try {
-      const response = await dispatch(userInfo.postUser({ url: "api/user", data })).unwrap();
-      console.log(response);
+      // const response = await dispatch(userInfo.postUser({ url: "api/user", data })).unwrap();
+      // console.log(response);
+      dispatch(userInfo.setUserInfo(data));
       alert("회원가입이 완료되었습니다.");
       navigate("/");
     } catch (err) {
@@ -112,32 +113,6 @@ const Register = () => {
           action={userAuth.setPhone}
         ></InputComponent>
         <BirthInput></BirthInput>
-        {/* <CalenderInput>
-          <InputComponent
-            name="year"
-            placeholder="1999"
-            title="태어난 년"
-            type="text"
-            validator="year"
-            action={userAuth.setYear}
-          ></InputComponent>
-          <InputComponent
-            name="month"
-            placeholder="3"
-            title="월"
-            type="text"
-            validator="month"
-            action={userAuth.setMonth}
-          ></InputComponent>
-          <InputComponent
-            name="day"
-            placeholder="21"
-            title="일"
-            type="text"
-            validator="day"
-            action={userAuth.setDay}
-          ></InputComponent>
-        </CalenderInput> */}
         <ButtonComponent title="제출" type="submit"></ButtonComponent>
       </InputFormWrapper>
       <FindComponent>

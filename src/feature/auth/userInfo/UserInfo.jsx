@@ -27,9 +27,9 @@ const UserInfo = () => {
     return { userInfo };
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     const id = cookies.get("userId");
-    const url = `/api/user/${id}`
+    const url = `/api/user/${id}`;
     const fetchFunc = async () => {
       try {
         const response = await dispatch(userInfo.getUser(url));
@@ -40,9 +40,8 @@ const UserInfo = () => {
 
         // handle error here
       }
-
-    }
-  })
+    };
+  }, []);
 
   const { name, id, email, password, phone, year, month, day, gender } = userSelector.userInfo;
   const birth = `${year}년 ${month}월 ${day}일`;
@@ -61,7 +60,7 @@ const UserInfo = () => {
         <UserInfoContentComponent title="email" content={email}></UserInfoContentComponent>
         <UserInfoContentComponent title="phone" content={phone}></UserInfoContentComponent>
         <UserInfoContentComponent title="birth" content={birth}></UserInfoContentComponent>
-        <UserInfoContentComponent title="gender" content={gender}></UserInfoContentComponent>
+        <UserInfoContentComponent title="gender" content={gender === "F" ? "여성" : "남성"}></UserInfoContentComponent>
         <StyledSubmitButton onClick={onClickHandler}>
           <span>수정하기</span>
         </StyledSubmitButton>
