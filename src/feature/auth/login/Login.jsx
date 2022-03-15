@@ -37,13 +37,10 @@ const Login = () => {
       try {
         const response = await request.post(url, data);
         console.log("response", response);
-        const a = document.cookie;
-        console.log("cookie", a);
-        // response.
-
-        // localStorage.setItem(response.) //pk 넣자
+        Cookies.set("userId", response.data);
+        localStorage.setItem("userId", response.data);
         alert("로그인 성공!");
-        // navigate("/user");
+        navigate("/user");
       } catch (err) {
         console.error(err);
         alert("로그인이 실패하였습니다.");
