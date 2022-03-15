@@ -11,9 +11,9 @@ import { CalenderWrapper } from "./Register";
 
 export const BirthInput = ({ defaultValue }) => {
   const dispatch = useDispatch();
-  const [birthYear, setBirthYear] = useState("");
-  const [birthMonth, setBirthMonth] = useState("");
-  const [birthDay, setBirthDay] = useState("");
+  const [birthYear, setBirthYear] = useState(defaultValue?.year || "");
+  const [birthMonth, setBirthMonth] = useState(defaultValue?.month || "");
+  const [birthDay, setBirthDay] = useState(defaultValue?.day || "");
   const [warningToggle, setWarningToggle] = useState(false);
   const [validBirth, setValidBirth] = useState(false);
 

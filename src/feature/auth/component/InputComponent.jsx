@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import styled from "@emotion/styled";
 
 export const InputComponent = ({ name, type, placeholder, title, validator, action, defaultValue, ...last }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(defaultValue || "");
   const [warningToggle, setWarningToggle] = useState(false);
 
   const dispatch = useDispatch();
