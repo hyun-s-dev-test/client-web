@@ -29,22 +29,24 @@ const Login = () => {
   const cookies = new Cookies();
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(userSelector);
+    console.log("data", userSelector);
     if (userSelector.id && userSelector.password) {
       console.log("데이터전송");
       const data = { id: userSelector.id, password: userSelector.password };
       const url = "/api/user/login";
       try {
-        // const response = await request.post(url, data);
-        // console.log("response", response);
-        // Cookies.set("userId", response.data);
-        // localStorage.setItem("userId", response.data);
+        const response = await request.post(url, data);
+        console.log("response", response);
+        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userName", response.data.name);
+        cookies.set("userId", response.data.id);
         alert("로그인 성공!");
         navigate("/user");
       } catch (err) {
-        console.error(err);
-        alert("로그인이 실패하였습니다.");
-        return;
+        console.log(err.response);
+        console.log(err.message);
+        if (err.response.status === 400) alert("로그인이 실패하였습니다.");
+        return alert(err.message);
       }
 
       dispatch(UserAuth.resetUserInfo());
