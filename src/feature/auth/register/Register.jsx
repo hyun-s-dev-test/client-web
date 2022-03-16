@@ -45,26 +45,15 @@ const Register = () => {
     }
     console.log("data", data);
     try {
-      // const response = await dispatch(userInfo.postUser({ url: "api/user", data })).unwrap();
-      // console.log(response);
-      dispatch(userInfo.setUserInfo(data));
+      const response = await dispatch(userInfo.postUser({ url: "/api/user", data })).unwrap();
+      console.log("response", response);
+      // dispatch(userInfo.setUserInfo({ data }));
       alert("회원가입이 완료되었습니다.");
       navigate("/");
     } catch (err) {
-      console.error(err);
-      alert("중복된 id입니다.");
-      return;
-
-      // handle error here
+      if (err.status === 400) return alert("중복된 id입니다.");
+      return alert(err.message);
     }
-    console.log("패칭성공");
-    // localStorage.setItem({userId : })
-    // request.post("url", data).then((res) => {
-    //   if (res.status === 200) {
-    //     alert("로그인성공");
-    //     navigate("login");
-    //   }
-    // });
   };
   return (
     <>
