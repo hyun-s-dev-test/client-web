@@ -12,7 +12,7 @@ export const userLogin = createAsyncThunk("userInfo/userLogin", async ({ url, da
     if (!error.response) {
       throw err;
     }
-    return rejectWithValue(error.response.data);
+    return rejectWithValue({ messege: error.message, status: error.response.status });
   }
 });
 
@@ -25,7 +25,7 @@ export const getUser = createAsyncThunk("userInfo/getUser", async ({ url, data }
     if (!error.response) {
       throw err;
     }
-    return rejectWithValue(error.response.data);
+    return rejectWithValue({ messege: error.message, status: error.response.status });
   }
 });
 
@@ -34,11 +34,12 @@ export const postUser = createAsyncThunk("userInfo/postUser", async ({ url, data
     const response = await request.post(url, data);
     return response.data;
   } catch (err) {
+    // console.log("err.response", err.response);
     let error = err; // cast the error for access
     if (!error.response) {
       throw err;
     }
-    return rejectWithValue(error.response.data);
+    return rejectWithValue({ messege: error.message, status: error.response.status });
   }
 });
 
@@ -51,7 +52,7 @@ export const patchUser = createAsyncThunk("userInfo/patchUser", async ({ url, da
     if (!error.response) {
       throw err;
     }
-    return rejectWithValue(error.response.data);
+    return rejectWithValue({ messege: error.message, status: error.response.status });
   }
 });
 
